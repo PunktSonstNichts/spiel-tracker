@@ -7,7 +7,7 @@
             <p>Keine Widgets :/</p>
         </slot>
         <AreYouSure
-            :confirm-msg="player.name || 'Spieler' + ' wirklich löschen?'"
+            :confirm-msg="(player.name || 'Spieler') + ' wirklich löschen?'"
             @confirm="deletePlayer()"
         >
             <button>{{ player.name || "Spieler" }} löschen</button>
