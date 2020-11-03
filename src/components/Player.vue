@@ -6,13 +6,20 @@
         <slot>
             <p>Keine Widgets :/</p>
         </slot>
-        <button @click="deletePlayer()">{{ player.name || "Spieler" }} löschen</button>
+        <AreYouSure
+            :confirm-msg="player.name || 'Spieler' + ' wirklich löschen?'"
+            @confirm="deletePlayer()"
+        >
+            <button>{{ player.name || "Spieler" }} löschen</button>
+        </AreYouSure>
     </div>
 </template>
 
 <script>
+import AreYouSure from "@/components/AreYouSure";
 export default {
     name: "HelloWorld",
+    components: { AreYouSure },
     props: {
         value: {
             type: Object,
