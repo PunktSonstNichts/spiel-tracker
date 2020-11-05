@@ -31,6 +31,9 @@
                 <span>Spieler hinzufügen</span>
             </div>
         </div>
+        <div v-if="gameSettings && gameSettings.differentPointsInRound">
+            <button @click="nextRound()">nächste Runde</button>
+        </div>
         <div>
             <h2>Handicaps für alle</h2>
 
@@ -43,8 +46,8 @@
 <script>
 import Settings from "@/views/Settings";
 var axios = require("axios");
-import Player from "./components/Player.vue";
-import HandiCap from "./components/HandiCap.vue";
+import Player from "./components/mechanics/Player.vue";
+import HandiCap from "./components/mechanics/HandiCap.vue";
 
 export default {
     name: "App",
@@ -56,26 +59,7 @@ export default {
     data() {
         return {
             gameSettings: null,
-            players: [
-                {
-                    id: 0,
-                    name: null,
-                    winCount: [],
-                    handicaps: {},
-                },
-                {
-                    id: 1,
-                    name: null,
-                    winCount: [],
-                    handicaps: {},
-                },
-                {
-                    id: 2,
-                    name: null,
-                    winCount: [],
-                    handicaps: {},
-                },
-            ],
+            players: [],
             handicaps: ["Bier", "Kippen"],
         };
     },
@@ -84,7 +68,9 @@ export default {
             return this.players.filter(Boolean);
         },
         totalRounds() {
-            return this.players.map((player) => player.winCount.length).reduce((a, b) => a + b);
+            return this.players.length > 0
+                ? this.players.map((player) => player.winCount.length).reduce((a, b) => a + b)
+                : 0;
         },
     },
     watch: {
@@ -99,6 +85,9 @@ export default {
     },
     mounted() {
         console.log(this.players);
+        this.addPlayer();
+        this.addPlayer();
+        this.addPlayer();
         this.players = this.players.filter(Boolean);
         /*        axios.post("http://localhost:/").then((response) => {
             console.log(response);
@@ -106,12 +95,17 @@ export default {
     },
 
     methods: {
-        addPlayer() {
+        addPlayer(name = null, winCount = [], handicaps = {}) {
+            const prev_id =
+                this.filteredPlayers.length > 0
+                    ? this.filteredPlayers[this.filteredPlayers.length - 1].id
+                    : -1;
             this.players.push({
-                id: this.filteredPlayers[this.filteredPlayers.length - 1].id + 1,
-                name: null,
-                winCount: [],
-                handicaps: {},
+                id: prev_id + 1,
+                name: name,
+                points: null,
+                winCount: winCount,
+                handicaps: handicaps,
             });
         },
         deletePlayer(player) {
@@ -132,6 +126,9 @@ export default {
                     }
                 }
             }
+        },
+        nextRound() {
+
         },
         log() {
             console.log(this.players);

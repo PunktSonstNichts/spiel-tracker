@@ -42,6 +42,12 @@ export default {
                     playerCount: undefined,
                 },
                 {
+                    name: "Skat",
+                    differentPointsInRound: true,
+                    Teams: 2,
+                    playerCount: 3,
+                },
+                {
                     name: "Backgammon",
                     differentPointsInRound: false,
                     playerCount: 2,
