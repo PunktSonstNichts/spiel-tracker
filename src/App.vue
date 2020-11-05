@@ -11,6 +11,7 @@
                 :key="player.id"
                 v-model="players[i]"
                 class="player"
+                :game-settings="gameSettings"
                 @delete="deletePlayer(player)"
             >
                 <template>
@@ -22,7 +23,11 @@
                     />
                 </template>
             </Player>
-            <div id="add-player" @click="addPlayer()">
+            <div
+                v-if="!gameSettings || gameSettings.playerCount === undefined"
+                id="add-player"
+                @click="addPlayer()"
+            >
                 <span>Spieler hinzufügen</span>
             </div>
         </div>
@@ -56,19 +61,19 @@ export default {
                     id: 0,
                     name: null,
                     winCount: [],
-                    handicaps: [],
+                    handicaps: {},
                 },
                 {
                     id: 1,
                     name: null,
                     winCount: [],
-                    handicaps: [],
+                    handicaps: {},
                 },
                 {
                     id: 2,
                     name: null,
                     winCount: [],
-                    handicaps: [],
+                    handicaps: {},
                 },
             ],
             handicaps: ["Bier", "Kippen"],
@@ -106,20 +111,25 @@ export default {
                 id: this.filteredPlayers[this.filteredPlayers.length - 1].id + 1,
                 name: null,
                 winCount: [],
-                handicaps: [],
+                handicaps: {},
             });
         },
         deletePlayer(player) {
-            this.players.splice(this.players.indexOf(player), 1);
+            if (this.players.length >= 2) {
+                this.players.splice(this.players.indexOf(player), 1);
+            }
         },
         adjustGameToSettings() {
-            console.log(this.gameSettings, this.players);
-            if (this.gameSettings && this.gameSettings.players) {
-                if (this.players.length > this.gameSettings.player) {
+            if (this.gameSettings && this.gameSettings.playerCount) {
+                if (this.players.length > this.gameSettings.playerCount) {
                     this.players.splice(
-                        this.gameSettings.player,
-                        this.players.length - this.gameSettings.players
+                        this.gameSettings.playerCount,
+                        this.players.length - this.gameSettings.playerCount
                     );
+                } else {
+                    for (let i = this.players.length; i < this.gameSettings.playerCount; i++) {
+                        this.addPlayer();
+                    }
                 }
             }
         },

@@ -7,6 +7,7 @@
             <p>Keine Widgets :/</p>
         </slot>
         <AreYouSure
+            v-if="!gameSettings || gameSettings.playerCount === undefined"
             :confirm-msg="(player.name || 'Spieler') + ' wirklich löschen?'"
             @confirm="deletePlayer()"
         >
@@ -22,6 +23,10 @@ export default {
     components: { AreYouSure },
     props: {
         value: {
+            type: Object,
+            default: () => {},
+        },
+        gameSettings: {
             type: Object,
             default: () => {},
         },

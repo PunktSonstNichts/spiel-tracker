@@ -20,7 +20,7 @@ export default {
                     name: "Arschloch",
                     differentPointsInRound: false,
                     Teams: null,
-                    player: null,
+                    playerCount: undefined,
                 };
             },
         },
@@ -33,18 +33,18 @@ export default {
                     name: "Doppelkopf",
                     differentPointsInRound: true,
                     Teams: 2,
-                    player: 4,
+                    playerCount: 4,
                 },
                 {
                     name: "Durak",
                     differentPointsInRound: false,
                     Teams: false,
-                    player: null,
+                    playerCount: undefined,
                 },
                 {
                     name: "Backgammon",
                     differentPointsInRound: false,
-                    player: 2,
+                    playerCount: 2,
                 },
             ],
         };
