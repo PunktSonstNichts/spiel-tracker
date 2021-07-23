@@ -114,6 +114,7 @@ export default {
             }
         },
         adjustGameToSettings() {
+            // set the player count properly
             if (this.gameSettings && this.gameSettings.playerCount) {
                 if (this.players.length > this.gameSettings.playerCount) {
                     this.players.splice(
@@ -127,9 +128,7 @@ export default {
                 }
             }
         },
-        nextRound() {
-
-        },
+        nextRound() {},
         log() {
             console.log(this.players);
             console.log(this.filteredPlayers);

@@ -8,8 +8,10 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@formatjs/intl-utils": "^3.8.4",
     "axios": "^0.19.2",
     "core-js": "^2.6.5",
+    "formatjs": "^0.1.1",
     "prettier": "^2.0.5",
     "vue": "^2.6.10"
   },

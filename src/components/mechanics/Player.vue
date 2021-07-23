@@ -1,9 +1,13 @@
 <template>
     <div id="player">
         <h3>{{ player.winCount.length }}</h3>
-        <SpanOrInput v-model="player.name" />
+        <Rank :rank="rank"></Rank>
+        <AwesomeInput v-model="player.name" label="Name" />
         <div v-if="gameSettings && gameSettings.differentPointsInRound">
             <input v-model="player.points" />
+        </div>
+        <div v-if="gameSettings && gameSettings.teams">
+            <button>team</button>
         </div>
         <button v-else @click="addWin()">Gewonnen!</button>
         <slot>
@@ -21,14 +25,19 @@
 
 <script>
 import AreYouSure from "@/components/widgets/AreYouSure";
-import SpanOrInput from "@/components/widgets/SpanOrInput";
+import AwesomeInput from "@/components/widgets/AwesomeInput";
+import Rank from "@/components/widgets/Rank";
 export default {
     name: "HelloWorld",
-    components: { SpanOrInput, AreYouSure },
+    components: { Rank, AwesomeInput, AreYouSure },
     props: {
         value: {
             type: Object,
             default: () => {},
+        },
+        rank: {
+            type: Number,
+            default: null,
         },
         gameSettings: {
             type: Object,
@@ -39,6 +48,9 @@ export default {
         return {
             player: this.value,
         };
+    },
+    computed() {
+
     },
     methods: {
         addWin() {

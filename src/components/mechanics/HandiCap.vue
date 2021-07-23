@@ -4,13 +4,19 @@
             <span>+1</span>
             <span id="handicap-name">{{ name }}</span>
         </div>
+        <span v-if="list.length > 0">
+            letzter Konsum:
+            <HumanReadableTime :time="list.slice(-1)[0]" />
+        </span>
         <span id="handicap-counter">{{ list.length }}</span>
     </div>
 </template>
 
 <script>
+import HumanReadableTime from "@/components/widgets/HumanReadableTime";
 export default {
     name: "HandiCap",
+    components: { HumanReadableTime },
     props: {
         name: {
             type: String,

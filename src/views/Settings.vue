@@ -19,7 +19,7 @@ export default {
                 return {
                     name: "Arschloch",
                     differentPointsInRound: false,
-                    Teams: null,
+                    teams: null,
                     playerCount: undefined,
                 };
             },
@@ -32,19 +32,19 @@ export default {
                 {
                     name: "Doppelkopf",
                     differentPointsInRound: true,
-                    Teams: 2,
+                    teams: 2,
                     playerCount: 4,
                 },
                 {
                     name: "Durak",
                     differentPointsInRound: false,
-                    Teams: false,
+                    teams: false,
                     playerCount: undefined,
                 },
                 {
                     name: "Skat",
                     differentPointsInRound: true,
-                    Teams: 2,
+                    teams: 2,
                     playerCount: 3,
                 },
                 {
